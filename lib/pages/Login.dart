@@ -38,7 +38,20 @@ class _SignInState extends State<SignIn> {
                     contentPadding: EdgeInsets.only(left: 20, top: 20),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)))),
-              )
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextField(
+                style: TextStyle(fontSize: 22),
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.lock),
+                  hintText: "Password",
+                  contentPadding: EdgeInsets.only(left: 20, top: 20),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                ),
+              ),
             ],
           ),
         ),
