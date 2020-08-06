@@ -7,15 +7,15 @@ class SignUp extends StatefulWidget {
   _SignUpState createState() => _SignUpState();
 }
 
-// TODO => Add AuthService
-// TODO => Add the TextControllers
-// TODO => Initialize controllers
+// TODO => Add AuthService => DONE
+// TODO => Add the TextControllers => DONE
+// TODO => Initialize controllers => DONE
 // TODO => Add submit function
 // TODO => Attach controllers
 // TODO => Finish
 class _SignUpState extends State<SignUp> {
   bool _showPassword = true;
-  AuthService _authService = AuthService();
+  AuthService git  = AuthService();
 
   TextEditingController emailInputController;
   TextEditingController passwordController;
@@ -29,7 +29,16 @@ class _SignUpState extends State<SignUp> {
     super.initState();
   }
 
-  submit() {
+  submit(String email, String password, String name) {
+    try {
+      _authService.createUser(email, password, name);
+      emailInputController.clear();
+      passwordController.clear();
+      nameController.clear();
+      Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (context) => Dashbaord()), (_) => false);
+
+    }
     print('Sign Up Completed');
   }
 
