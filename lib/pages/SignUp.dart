@@ -9,6 +9,7 @@ class SignUp extends StatefulWidget {
 
 // TODO => Add AuthService
 // TODO => Add the TextControllers
+// TODO => Initialize controllers
 // TODO => Add submit function
 // TODO => Attach controllers
 // TODO => Finish
@@ -19,6 +20,14 @@ class _SignUpState extends State<SignUp> {
   TextEditingController emailInputController;
   TextEditingController passwordController;
   TextEditingController nameController;
+
+  @override
+  initState() {
+    emailInputController = new TextEditingController();
+    passwordController = new TextEditingController();
+    nameController = new TextEditingController();
+    super.initState();
+  }
 
   submit() {
     print('Sign Up Completed');
