@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:legal_precedents/pages/ForgotPassword.dart';
-import 'package:legal_precedents/pages/SignUp.dart';
+import 'dashbaord.dart';
+import "package:legal_precedents/services/auth_service.dart";
 
-class SignIn extends StatefulWidget {
+class SignUp extends StatefulWidget {
   @override
-  _SignInState createState() => _SignInState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _SignInState extends State<SignIn> {
+// TODO => Add AuthService
+// TODO => Add the TextControllers
+// TODO => Add submit function
+// TODO => Attach controllers
+// TODO => Finish
+class _SignUpState extends State<SignUp> {
   bool _showPassword = true;
+  AuthService _authService = AuthService();
 
-  @override
+  TextEditingController emailInputController;
+  TextEditingController passwordController;
+  TextEditingController nameController;
+
   submit() {
-    print("I have submitted");
+    print('Sign Up Completed');
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -25,24 +35,25 @@ class _SignInState extends State<SignIn> {
               SizedBox(
                 height: 100,
               ),
-              Text(
-                'Sign into Your Account',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 27,
+              Center(
+                child: Text(
+                  'Create Your Account',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
                 ),
               ),
               SizedBox(
-                height: 50,
+                height: 20,
               ),
               TextField(
-                style: TextStyle(fontSize: 22),
+                style: TextStyle(fontSize: 18),
                 decoration: InputDecoration(
                     prefixIcon: Icon(
                       Icons.account_circle,
                       color: Color(0xFF707070),
                     ),
-                    hintText: "Email Address",
+                    hintText: "First Name",
                     contentPadding: EdgeInsets.only(left: 20, top: 20),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)))),
@@ -51,7 +62,22 @@ class _SignInState extends State<SignIn> {
                 height: 10,
               ),
               TextField(
-                style: TextStyle(fontSize: 22),
+                style: TextStyle(fontSize: 18),
+                decoration: InputDecoration(
+                    prefixIcon: Icon(
+                      Icons.account_circle,
+                      color: Color(0xFF707070),
+                    ),
+                    hintText: "Last Name",
+                    contentPadding: EdgeInsets.only(left: 20, top: 20),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)))),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextField(
+                style: TextStyle(fontSize: 18),
                 obscureText: this._showPassword,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.lock),
@@ -74,7 +100,7 @@ class _SignInState extends State<SignIn> {
                 height: 30,
               ),
               Container(
-                width: MediaQuery.of(context).size.width * 0.6,
+                width: 60,
                 child: RaisedButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
@@ -84,54 +110,12 @@ class _SignInState extends State<SignIn> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child: Text(
-                      "Sign In",
+                      "Sign Up",
                       style: TextStyle(fontSize: 24),
                     ),
                   ),
                 ),
               ),
-              SizedBox(
-                height: 25,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  GestureDetector(
-                    child: Text(
-                      "Forgot Password ?",
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColor, fontSize: 18),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ForgotPassword()));
-                    },
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    "Don't have an account yet ? ",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  GestureDetector(
-                    child: Text(
-                      "Sign Up",
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColor, fontSize: 18),
-                    ),
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => SignUp()));
-                    },
-                  ),
-                ],
-              )
             ],
           ),
         ),

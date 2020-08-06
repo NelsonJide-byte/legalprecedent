@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "769156022462",
+    "firebase_url": "https://legal-precedent-9685c.firebaseio.com",
+    "project_id": "legal-precedent-9685c",
+    "storage_bucket": "legal-precedent-9685c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769156022462:android:a06afe25c610a0f03bdeef",
+        "android_client_info": {
+          "package_name": "gavel.ng.legal_precedents"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "769156022462-c661lvo1ra69dhk1abonfjn3hn7teij7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZ1zaMFy7zfc3_P3PJqgUhhd78z3aTwZc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "769156022462-c661lvo1ra69dhk1abonfjn3hn7teij7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
