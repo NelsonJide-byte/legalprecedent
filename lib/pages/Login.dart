@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:legal_precedents/pages/ForgotPassword.dart';
 import 'package:legal_precedents/pages/SignUp.dart';
+import 'package:legal_precedents/pages/dashbaord.dart';
+import 'package:legal_precedents/services/auth_service.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -10,9 +12,31 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   bool _showPassword = true;
 
+  AuthService _authService = AuthService();
+
+  TextEditingController emailInputController;
+  TextEditingController passwordController;
+
   @override
-  submit() {
-    print("I have submitted");
+  initState() {
+    emailInputController = TextEditingController();
+    passwordController = TextEditingController();
+    super.initState();
+  }
+
+  submit(String email, String password) async {
+    var uid = await _authService.signIn(
+      email,
+      password,
+    );
+    if (uid != null) {
+      Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (context) => Dashbaord()), (_) => false);
+      emailInputController.clear();
+      passwordController.clear();
+    } else {
+      print("An error occurred");
+    }
   }
 
   Widget build(BuildContext context) {
@@ -36,6 +60,7 @@ class _SignInState extends State<SignIn> {
                 height: 50,
               ),
               TextField(
+                controller: emailInputController,
                 style: TextStyle(fontSize: 22),
                 decoration: InputDecoration(
                     prefixIcon: Icon(
@@ -51,6 +76,7 @@ class _SignInState extends State<SignIn> {
                 height: 10,
               ),
               TextField(
+                controller: passwordController,
                 style: TextStyle(fontSize: 22),
                 obscureText: this._showPassword,
                 decoration: InputDecoration(
@@ -80,7 +106,10 @@ class _SignInState extends State<SignIn> {
                       borderRadius: BorderRadius.circular(30)),
                   color: Theme.of(context).primaryColor,
                   textColor: Colors.white,
-                  onPressed: () {},
+                  onPressed: () {
+                    submit(emailInputController.text.trim(),
+                        passwordController.text);
+                  },
                   child: Padding(
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child: Text(

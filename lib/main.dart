@@ -14,9 +14,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          primarySwatch: Colors.deepOrange,
-          textTheme:
-              GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)),
+        primarySwatch: Colors.deepOrange,
+//          textTheme:
+//              GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)
+      ),
       home: Scaffold(
         body: SplashScreen(),
       ),

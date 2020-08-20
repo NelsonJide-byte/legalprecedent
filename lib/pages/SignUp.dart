@@ -10,12 +10,12 @@ class SignUp extends StatefulWidget {
 // TODO => Add AuthService => DONE
 // TODO => Add the TextControllers => DONE
 // TODO => Initialize controllers => DONE
-// TODO => Add submit function
+// TODO => Add submit function =>DONE
 // TODO => Attach controllers
 // TODO => Finish
 class _SignUpState extends State<SignUp> {
   bool _showPassword = true;
-  AuthService git  = AuthService();
+  AuthService _authService = AuthService();
 
   TextEditingController emailInputController;
   TextEditingController passwordController;
@@ -29,17 +29,17 @@ class _SignUpState extends State<SignUp> {
     super.initState();
   }
 
-  submit(String email, String password, String name) {
-    try {
-      _authService.createUser(email, password, name);
+  submit(String email, String password, String name) async {
+    var uid = await _authService.createUser(email, password, name);
+    if (uid != null) {
+      Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (context) => Dashbaord()), (_) => false);
       emailInputController.clear();
       passwordController.clear();
       nameController.clear();
-      Navigator.pushAndRemoveUntil(context,
-          MaterialPageRoute(builder: (context) => Dashbaord()), (_) => false);
-
+    } else {
+      print("An error occurred");
     }
-    print('Sign Up Completed');
   }
 
   @override
@@ -65,13 +65,14 @@ class _SignUpState extends State<SignUp> {
                 height: 20,
               ),
               TextField(
+                controller: emailInputController,
                 style: TextStyle(fontSize: 18),
                 decoration: InputDecoration(
                     prefixIcon: Icon(
                       Icons.account_circle,
                       color: Color(0xFF707070),
                     ),
-                    hintText: "First Name",
+                    hintText: "Email Address",
                     contentPadding: EdgeInsets.only(left: 20, top: 20),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)))),
@@ -80,13 +81,14 @@ class _SignUpState extends State<SignUp> {
                 height: 10,
               ),
               TextField(
+                controller: nameController,
                 style: TextStyle(fontSize: 18),
                 decoration: InputDecoration(
                     prefixIcon: Icon(
                       Icons.account_circle,
                       color: Color(0xFF707070),
                     ),
-                    hintText: "Last Name",
+                    hintText: "Name",
                     contentPadding: EdgeInsets.only(left: 20, top: 20),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)))),
@@ -95,6 +97,7 @@ class _SignUpState extends State<SignUp> {
                 height: 10,
               ),
               TextField(
+                controller: passwordController,
                 style: TextStyle(fontSize: 18),
                 obscureText: this._showPassword,
                 decoration: InputDecoration(
@@ -124,7 +127,10 @@ class _SignUpState extends State<SignUp> {
                       borderRadius: BorderRadius.circular(30)),
                   color: Theme.of(context).primaryColor,
                   textColor: Colors.white,
-                  onPressed: () {},
+                  onPressed: () {
+                    submit(emailInputController.text.trim(),
+                        passwordController.text, nameController.text);
+                  },
                   child: Padding(
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child: Text(

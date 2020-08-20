@@ -3,24 +3,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final Firestore _firestore = Firestore.instance;
 
   Stream<String> get onAuthStateChanged =>
       _firebaseAuth.onAuthStateChanged.map((FirebaseUser user) => user?.uid);
 
-  createUser(String email, String password, String name) async {
+  Future<String> createUser(String email, String password, String name) async {
     final currentUser = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
 
-    await _firestore
-        .collection("users")
-        .document(currentUser.user.uid)
-        .setData({"username": name, "uid": currentUser.user.uid});
+    return currentUser.user.uid;
   }
 
-  signIn(String email, String password) async {
-    await _firebaseAuth.signInWithEmailAndPassword(
+  Future<String> signIn(String email, String password) async {
+    final currentUser = await _firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
+    return currentUser.user.uid;
   }
 
   signOut() async {
